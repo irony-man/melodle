@@ -1,26 +1,43 @@
 "use client";
 import CustomGrid from "@/components/custom/CustomGrid";
 import CustomSparkles from "@/components/custom/CustomSparkles";
-import RenderModel from "@/components/RenderModel";
 import colors from "@/styles/variables";
-import { Html, Text } from "@react-three/drei";
-import { useFrame } from "@react-three/fiber";
+import { Loader, PresentationControls, Text } from "@react-three/drei";
+import { Canvas } from "@react-three/fiber";
 
 import dynamic from "next/dynamic";
-import { useRef, useState } from "react";
-import { Object3D } from "three";
-import { easing } from "maath";
+import { Suspense } from "react";
 
 const Headphones = dynamic(() => import("@/components/models/Headphones"), {
     ssr: false,
-    loading: () => <Text>Loading...</Text>,
+    loading: () => <Text fontSize={0.5}>Loading...</Text>,
 });
 
 export default function Hero() {
+
     return (
         <div className="w-full h-screen absolute z-10">
             {/* <Navigation /> */}
-            <RenderModel model={<Headphones />}>
+
+            <Canvas
+                className="w-screen h-screen -z-10 relative"
+                dpr={[1, 2]}
+                gl={{ antialias: true }}
+                shadows
+            >
+                <PresentationControls
+                    snap
+                    global
+                    zoom={0.8}
+                    polar={[0, Math.PI / 4]}
+                    azimuth={[-Math.PI / 4, Math.PI / 4]}
+                >
+                    <Suspense fallback={null}>
+                        <Headphones />
+                    </Suspense>
+                </PresentationControls>
+
+                <Loader />
                 <CustomGrid />
                 <spotLight
                     position={[0, 6, 0]}
@@ -43,7 +60,7 @@ export default function Hero() {
                     position={[10, 10, -10]}
                 />
                 <CustomSparkles color={colors.secondary} />
-            </RenderModel>
+            </Canvas>
             <div className="absolute flex flex-col items-center text-center top-1/2 top-[80%] left-1/2 -translate-y-1/2 -translate-x-1/2">
                 <h1 className="font-bold font-altroned text-6xl xs:text-7xl sm:text-8xl lg:text-9xl text-secondary">
                     melodle
@@ -51,7 +68,6 @@ export default function Hero() {
                 <p className="font-light text-foreground text-lg">
                     melody + wordle
                 </p>
-				
             </div>
         </div>
     );
