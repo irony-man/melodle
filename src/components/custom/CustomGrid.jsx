@@ -4,7 +4,7 @@ import { Grid } from "@react-three/drei";
 import colors from "@/styles/variables";
 import { useFrame } from "@react-three/fiber";
 
-const InfiniteGrid = (props) => {
+const CustomGrid = (props) => {
     const gridRef = useRef();
 
     useFrame(() => {
@@ -17,10 +17,10 @@ const InfiniteGrid = (props) => {
             args={[10, 10]}
             position={[0, -2.5, 0]}
             rotation={[0, -Math.PI / 4, 0]}
-            cellColor={colors.secondary}
+            cellColor={colors.primary}
             sectionSize={1}
             sectionThickness={1}
-            sectionColor={colors.secondary}
+            sectionColor={colors.primary}
             fadeDistance={10}
             infiniteGrid
             {...props}
@@ -28,4 +28,4 @@ const InfiniteGrid = (props) => {
     );
 };
 
-export default InfiniteGrid;
+export default CustomGrid;

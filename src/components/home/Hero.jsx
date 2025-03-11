@@ -2,11 +2,13 @@
 import CustomGrid from "@/components/custom/CustomGrid";
 import CustomSparkles from "@/components/custom/CustomSparkles";
 import colors from "@/styles/variables";
-import { Loader, PresentationControls, Text } from "@react-three/drei";
+import { Html, Loader, PresentationControls, Text } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
+import CustomText from "@/components/custom/CustomText";
+import Button from "../custom/Button";
 
 const Headphones = dynamic(() => import("@/components/models/Headphones"), {
     ssr: false,
@@ -14,17 +16,11 @@ const Headphones = dynamic(() => import("@/components/models/Headphones"), {
 });
 
 export default function Hero() {
-
     return (
-        <div className="w-full h-screen absolute z-10">
+        <div className="w-full h-screen z-10">
             {/* <Navigation /> */}
 
-            <Canvas
-                className="w-screen h-screen -z-10 relative"
-                dpr={[1, 2]}
-                gl={{ antialias: true }}
-                shadows
-            >
+            <Canvas dpr={[1, 2]} gl={{ antialias: true }} shadows>
                 <PresentationControls
                     snap
                     global
@@ -35,22 +31,26 @@ export default function Hero() {
                     <Suspense fallback={null}>
                         <Headphones />
                     </Suspense>
+                    {/* <div className="absolute flex flex-col items-center text-center top-1/2 top-[80%] left-1/2 -translate-y-1/2 -translate-x-1/2"> */}
+                    {/* <Text fontSize={0.5}>Loading...</Text> */}
+                    <CustomText
+                        position={[0, -1.2, 0]}
+                        fontSize={window.innerWidth < 768 ? 0.6 : 0.75}
+                        color={colors.primary}
+                    >
+                        melodle
+                    </CustomText>
+                    <CustomText position={[0, -1.8, 0]}>
+                        melody + wordle
+                    </CustomText>
                 </PresentationControls>
 
                 <Loader />
                 <CustomGrid />
-                <spotLight
-                    position={[0, 6, 0]}
-                    castShadow
-                    color="#f1dffc"
-                    intensity={100}
-                    distance={8}
-                    angle={Math.PI / 6}
-                />
-                <hemisphereLight
-                    intensity={1}
-                    color="purple"
-                    groundColor="indigo"
+                <directionalLight
+                    intensity={60}
+                    color={colors.background}
+                    position={[0, 0, 5]}
                 />
                 <directionalLight
                     castShadow
@@ -59,16 +59,11 @@ export default function Hero() {
                     shadow-bias={-0.0001}
                     position={[10, 10, -10]}
                 />
-                <CustomSparkles color={colors.secondary} />
+                <CustomSparkles color={colors.foreground} />
+                <Html center position={[0, -3, 0]}>
+                    <Button className="w-48">Get Started</Button>
+                </Html>
             </Canvas>
-            <div className="absolute flex flex-col items-center text-center top-1/2 top-[80%] left-1/2 -translate-y-1/2 -translate-x-1/2">
-                <h1 className="font-bold font-altroned text-6xl xs:text-7xl sm:text-8xl lg:text-9xl text-secondary">
-                    melodle
-                </h1>
-                <p className="font-light text-foreground text-lg">
-                    melody + wordle
-                </p>
-            </div>
         </div>
     );
 }

@@ -1,4 +1,6 @@
 {
-    "primary": "#15142F",
-    "secondary": "#69247C"
+    "background": "#640D5F",
+    "primary": "#D91656",
+    "secondary": "#00879E",
+    "foreground": "#FFB200"
 }

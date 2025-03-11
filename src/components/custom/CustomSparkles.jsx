@@ -8,7 +8,7 @@ const CustomSparkles = (props) => {
         <Sparkles
             count={200}
             scale={[20, 20, 10]}
-            size={1.5}
+            size={2}
             speed={2}
             {...props}
         />
