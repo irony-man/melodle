@@ -9,11 +9,13 @@ import { Color } from "three";
 import { useFrame, useThree } from "@react-three/fiber";
 import colors from "@/styles/variables";
 import { useSpring, a } from "@react-spring/three";
+import useScreenSize from "../hooks/useScreenSize";
 
 const Headphones = React.memo(function Headphones(props) {
     const { nodes, materials, scene } = useGLTF("/models/Headphones.glb");
 
-    const scale = window.innerWidth < 768 ? 1.5 : 2.5;
+    const size = useScreenSize();
+    const scale = size < 768 ? 1.5 : 2.5;
 
     const [spring] = useSpring(
         () => ({

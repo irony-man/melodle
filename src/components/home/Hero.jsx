@@ -9,6 +9,7 @@ import dynamic from "next/dynamic";
 import { Suspense } from "react";
 import CustomText from "@/components/custom/CustomText";
 import Button from "../custom/Button";
+import useScreenSize from "../hooks/useScreenSize";
 
 const Headphones = dynamic(() => import("@/components/models/Headphones"), {
     ssr: false,
@@ -16,7 +17,9 @@ const Headphones = dynamic(() => import("@/components/models/Headphones"), {
 });
 
 export default function Hero() {
-    const fontSize = window.innerWidth < 768 ? 0.6 : 0.75;
+    const size = useScreenSize();
+    const fontSize = size < 768 ? 0.6 : 0.75;
+    
     return (
         <div className="w-full h-screen z-10">
             {/* <Navigation /> */}
