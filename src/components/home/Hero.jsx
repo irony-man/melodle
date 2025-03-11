@@ -16,6 +16,7 @@ const Headphones = dynamic(() => import("@/components/models/Headphones"), {
 });
 
 export default function Hero() {
+    const fontSize = window.innerWidth < 768 ? 0.6 : 0.75;
     return (
         <div className="w-full h-screen z-10">
             {/* <Navigation /> */}
@@ -35,7 +36,7 @@ export default function Hero() {
                     {/* <Text fontSize={0.5}>Loading...</Text> */}
                     <CustomText
                         position={[0, -1.2, 0]}
-                        fontSize={window.innerWidth < 768 ? 0.6 : 0.75}
+                        fontSize={fontSize}
                         color={colors.primary}
                     >
                         melodle
