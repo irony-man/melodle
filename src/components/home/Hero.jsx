@@ -19,12 +19,13 @@ const Headphones = dynamic(() => import("@/components/models/Headphones"), {
 export default function Hero() {
     const size = useScreenSize();
     const fontSize = size < 768 ? 0.6 : 0.75;
-    
+
     return (
         <div className="w-full h-screen z-10">
             {/* <Navigation /> */}
+            <Loader />
 
-            <Canvas dpr={[1, 2]} gl={{ antialias: true }} shadows>
+            <Canvas className="w-full h-full" dpr={[1, 2]} gl={{ antialias: true }} shadows>
                 <PresentationControls
                     snap
                     global
@@ -49,7 +50,6 @@ export default function Hero() {
                     </CustomText>
                 </PresentationControls>
 
-                <Loader />
                 <CustomGrid />
                 <directionalLight
                     intensity={60}
